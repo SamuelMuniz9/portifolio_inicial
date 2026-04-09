@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samuel Muniz - Full Stack Developer & Freelancer</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+    <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background: #0a0e12;
+            color: #e4e4e7;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glass-effect {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .glow-accent {
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+        }
+        
+        .glow-accent:hover {
+            box-shadow: 0 0 40px rgba(16, 185, 129, 0.6);
+        }
+        
+        .project-card {
+            background: rgba(20, 30, 50, 0.5);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            border-color: rgba(16, 185, 129, 0.5);
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.2);
+            transform: translateY(-5px);
+        }
+        
+        .nav-link {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #10b981;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            color: #0a0e12;
+            font-weight: 600;
+            padding: 12px 28px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #e4e4e7;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 12px 28px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+        
+        .btn-secondary:hover {
+            border-color: rgba(16, 185, 129, 1);
+            color: #10b981;
+        }
+        
+        .tech-badge {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #34d399;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .tech-badge:hover {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: rgba(16, 185, 129, 0.8);
+        }
+        
+        .section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 768px) {
+            .section {
+                padding: 60px 20px;
+            }
+        }
+        
+        .highlight-box {
+            background: rgba(16, 185, 129, 0.05);
+            border-left: 3px solid #10b981;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 w-full z-50 glass-effect border-b border-gray-800/50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold gradient-text">
+                SAMUEL<span class="text-gray-500">.</span>DEV
+            </a>
+            <div class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#home" class="nav-link text-gray-400 hover:text-emerald-400 transition">Home</a>
+                <a href="#sobre" class="nav-link text-gray-400 hover:text-emerald-400 transition">Sobre</a>
+                <a href="#projetos" class="nav-link text-gray-400 hover:text-emerald-400 transition">Projetos</a>
+                <a href="#contato" class="nav-link text-gray-400 hover:text-emerald-400 transition">Contato</a>
+            </div>
+            <button id="menuToggle" class="md:hidden text-gray-400 hover:text-emerald-400">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-gray-900/95 border-t border-gray-800">
+            <a href="#home" class="block px-6 py-3 text-gray-400 hover:text-emerald-400">Home</a>
+            <a href="#sobre" class="block px-6 py-3 text-gray-400 hover:text-emerald-400">Sobre</a>
+            <a href="#projetos" class="block px-6 py-3 text-gray-400 hover:text-emerald-400">Projetos</a>
+            <a href="#contato" class="block px-6 py-3 text-gray-400 hover:text-emerald-400">Contato</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative min-h-screen pt-32 pb-20 px-6 flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute top-20 left-10 w-72 h-72 bg-emerald-500/5 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-40 right-10 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl"></div>
+        </div>
+        
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 mb-8 text-sm font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 rounded-full">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+                </span>
+                Disponível para projetos
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                Transformando ideias em
+                <span class="gradient-text"> código funcional</span>
+            </h1>
+            
+            <p class="text-xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
+                Full Stack Developer especializado em criar soluções web modernas, escaláveis e performáticas. Atualmente atuando como freelancer para ajudar startups e empresas a concretizarem seus projetos.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#projetos" class="btn-primary">
+                    <span>Ver Projetos</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                    </svg>
+                </a>
+                <a href="#contato" class="btn-secondary">
+                    Começar um projeto
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE SECTION -->
+    <section id="sobre" class="section">
+        <div class="max-w-4xl">
+            <h2 class="text-4xl md:text-5xl font-bold mb-12">Sobre Mim</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-start">
+                <div>
+                    <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                        Sou Samuel Muniz, um desenvolvedor full stack apaixonado por criar experiências web incríveis. Tenho experiência em arquitetar sistemas complexos, desenvolver interfaces modernas e implementar soluções que realmente fazem diferença.
+                    </p>
+                    <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                        Como freelancer, trabalho com startups e empresas em diferentes segmentos, ajudando a transformar visões em produtos reais. Minha abordagem combina clean code, performance otimizada e design responsivo.
+                    </p>
+                    <p class="text-lg text-gray-300 leading-relaxed">
+                        Quando não estou codificando, estou explorando novas tecnologias, contribuindo para projetos open source ou compartilhando conhecimento com a comunidade.
+                    </p>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="highlight-box">
+                        <h3 class="text-emerald-400 font-bold mb-2">🎯 Especialidades</h3>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li>• Full Stack Development (Frontend + Backend)</li>
+                            <li>• Arquitetura de Sistemas Escaláveis</li>
+                            <li>• IoT & Integração de Dados</li>
+                            <li>• Performance Web Otimizada</li>
+                            <li>• APIs RESTful e Microsserviços</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="highlight-box">
+                        <h3 class="text-emerald-400 font-bold mb-2">💻 Tech Stack</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-badge">React</span>
+                            <span class="tech-badge">Angular</span>
+                            <span class="tech-badge">Java</span>
+                            <span class="tech-badge">Spring Boot</span>
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">PostgreSQL</span>
+                            <span class="tech-badge">Node.js</span>
+                            <span class="tech-badge">TypeScript</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJETOS SECTION -->
+    <section id="projetos" class="section bg-gradient-to-b from-gray-900 to-gray-800/20">
+        <h2 class="text-4xl md:text-5xl font-bold mb-16 text-center">Projetos em Destaque</h2>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Projeto 1 -->
+            <a href="https://offra.net/">
+                <div class="project-card rounded-xl overflow-hidden backdrop-blur-sm" >
+                    <div class="aspect-video bg-gradient-to-br from-emerald-900/30 to-gray-900 flex items-center justify-center overflow-hidden">
+                        <div class="text-center">
+                            <svg class="w-16 h-16 mx-auto text-emerald-400/50 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5h.01M17.828 6.172l-.707-.707"></path>
+                            </svg>
+                            <p class="text-gray-400 text-sm">Landing Page - React</p>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-3 text-white">Landing Page Responsiva</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Interface moderna criada para apresentar produtos/serviços com foco em conversão. Utilizei React para garantir performance, responsividade e experiência rápida do usuário.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-badge">React.js</span>
+                            <span class="tech-badge">CSS3</span>
+                            <span class="tech-badge">Node.JS</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Projeto 2 -->
+            <a href="https://github.com/SamuelMuniz9/MVP_Summit_Sistema_Hospitalar">
+                <div class="project-card rounded-xl overflow-hidden backdrop-blur-sm">
+                    <div class="aspect-video bg-gradient-to-br from-blue-900/30 to-gray-900 flex items-center justify-center overflow-hidden">
+                        <div class="text-center">
+                            <svg class="w-16 h-16 mx-auto text-blue-400/50 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                            <p class="text-gray-400 text-sm">Monitoramento IoT</p>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-3 text-white">Monitoramento Hospitalar (IoT)</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            MVP que reduz o tempo de resposta em emergências e centraliza status de equipamentos críticos. Sistema inteligente para digitalizar controle de ativos e automatizar ordens de serviço.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">API</span>
+                            <span class="tech-badge">SQLite</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Projeto 3 -->
+            <a href="https://github.com/SamuelMuniz9/muscle-fullstack">
+                <div class="project-card rounded-xl overflow-hidden backdrop-blur-sm">
+                    <div class="aspect-video bg-gradient-to-br from-purple-900/30 to-gray-900 flex items-center justify-center overflow-hidden">
+                        <div class="text-center">
+                            <svg class="w-16 h-16 mx-auto text-purple-400/50 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                            </svg>
+                            <p class="text-gray-400 text-sm">Full Stack - Java</p>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-3 text-white">Muscle API - Gestão Acadêmica</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Sistema completo de gestão para academias desenvolvido com Spring Boot 3 e Angular. CRUD completo com persistência em banco de dados, autenticação segura e arquitetura limpa.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-badge">Java</span>
+                            <span class="tech-badge">Spring Boot</span>
+                            <span class="tech-badge">Angular</span>
+                            <span class="tech-badge">PostgreSQL</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <!-- Projeto 4 -->
+            <a href="https://nefag.vercel.app/">
+                <div class="project-card rounded-xl overflow-hidden backdrop-blur-sm">
+                    <div class="aspect-video bg-gradient-to-br from-amber-900/30 to-gray-900 flex items-center justify-center overflow-hidden">
+                        <div class="text-center">
+                            <svg class="w-16 h-16 mx-auto text-amber-400/50 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            <p class="text-gray-400 text-sm">Frontend Fundamentals</p>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-3 text-white">NEFAG - Web Fundamentals</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Projeto focado em fundamentos web com interface responsiva, semântica adequada, performance otimizada e manipulação DOM com JavaScript puro. Resultado: carregamento rápido e UX fluida.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-badge">HTML5</span>
+                            <span class="tech-badge">CSS3</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">Responsivo</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            </div>
+        
+    </section>
+
+    <!-- CONTATO SECTION -->
+    <section id="contato" class="section">
+        <div class="max-w-2xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">Vamos trabalhar juntos?</h2>
+            <p class="text-xl text-gray-400 mb-12">
+                Tenho soluções para seus desafios técnicos. Entre em contato e vamos discutir como posso ajudar seu projeto a crescer.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                <a href="https://wa.me/5511992320475?text=Ol%C3%A1%20Samuel!%20Gostaria%20de%20conversar%20sobre%20um%20projeto" target="_blank" class="btn-primary">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.844 1.159c-1.528.766-2.857 1.8-3.945 3.12-1.088 1.32-1.86 2.8-2.312 4.38a9.87 9.87 0 00-.493 3.145 9.835 9.835 0 001.293-4.842c.393-1.368.923-2.63 1.58-3.764.657-1.134 1.44-2.126 2.341-2.971a9.52 9.52 0 013.39-2.227zm16.5.016A11.89 11.89 0 0012 1.07M12 1.07C6.44 1.07 1.96 5.547 1.96 11.11c0 1.884.394 3.68 1.089 5.282H1.93c-.46 0-.84.38-.84.84v.04c0 .46.38.84.84.84h1.167c.31.552.74 1.062 1.268 1.5a11.882 11.882 0 0010.609 2.91c5.562 0 10.04-4.478 10.04-10.04S17.562 1.07 12 1.07z"></path>
+                    </svg>
+                    WhatsApp
+                </a>
+                <a href="mailto:msamuelmuniz@gmail.com" class="btn-secondary">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                    Email
+                </a>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8">
+                <p class="text-gray-500 text-sm mb-6">Conecte-se comigo nas redes</p>
+                <div class="flex justify-center gap-6">
+                    <a href="https://linkedin.com/in/samuel-muniz-a48863294/" target="_blank" class="text-gray-400 hover:text-emerald-400 transition transform hover:scale-110">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.475-2.236-1.986-2.236-1.081 0-1.722.722-2.004 1.418-.103.249-.129.597-.129.946v5.441h-3.554s.047-8.821 0-9.738h3.554v1.38c.43-.664 1.195-1.61 2.904-1.61 2.12 0 3.714 1.388 3.714 4.37v5.598zM5.337 8.855c-1.144 0-1.915-.759-1.915-1.71 0-.955.77-1.71 1.958-1.71 1.187 0 1.915.755 1.938 1.71 0 .951-.751 1.71-1.981 1.71zm1.588 11.597H3.749V9.614h3.176v10.838zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"></path>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/SamuelMuniz9" target="_blank" class="text-gray-400 hover:text-emerald-400 transition transform hover:scale-110">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+                        </svg>
+                    </a>
+                    <a href="https://instagram.com/samuel.muniz_/" target="_blank" class="text-gray-400 hover:text-emerald-400 transition transform hover:scale-110">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.057-1.645.069-4.849.069-3.204 0-3.584-.012-4.849-.069-3.259-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.322a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-gray-800 py-8 text-center bg-gray-900/50">
+        <p class="text-sm text-gray-500">
+            © 2026 Samuel Muniz. Desenvolvido com React, Angular, Java e muito ☕️
+        </p>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Menu toggle mobile
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+        
+        // Scroll animations
+        gsap.utils.toArray('section').forEach((section) => {
+            gsap.fromTo(
+                section,
+                { opacity: 0, y: 50 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 80%',
+                        toggleActions: 'play none none none',
+                    },
+                }
+            );
+        });
+        
+        // Stagger animations for cards
+        gsap.utils.toArray('.project-card').forEach((card, index) => {
+            gsap.fromTo(
+                card,
+                { opacity: 0, y: 50 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    delay: index * 0.1,
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 80%',
+                        toggleActions: 'play none none none',
+                    },
+                }
+            );
+        });
+        
+        // Smooth scroll for buttons
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "name": "samuel-muniz-portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio profissional de Samuel Muniz - Full Stack Developer",
+  "main": "index.html",
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "npx http-server -p 3000 -c-1",
+    "build": "echo 'No build needed for static site'"
+  },
+  "keywords": [
+    "portfolio",
+    "developer",
+    "full-stack",
+    "freelancer"
+  ],
+  "author": "Samuel Muniz",
+  "license": "MIT",
+  "devDependencies": {}
+}
