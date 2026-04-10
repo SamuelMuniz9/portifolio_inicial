@@ -4,68 +4,6 @@
 
 Um portfólio moderno, responsivo e visualmente atraente construído inspirado no design minimalista do Keita Yamada.
 
-### ✨ Características
-
-- **Design Minimalista**: Layout clean e elegante que atrai atenção
-- **Totalmente Responsivo**: Funciona perfeitamente em mobile, tablet e desktop
-- **Animações Suaves**: Efeitos visuais com GSAP e ScrollTrigger
-- **Dark Mode**: Interface otimizada para conforto visual
-- **Performance Otimizada**: Carregamento rápido e eficiente
-- **SEO Friendly**: Estrutura HTML semântica
-
-### 🚀 Deployment no Vercel
-
-#### Opção 1: CLI do Vercel
-
-```bash
-# 1. Instale o Vercel CLI
-npm install -g vercel
-
-# 2. Faça login na sua conta Vercel
-vercel login
-
-# 3. Deploy o projeto
-vercel
-```
-
-#### Opção 2: GitHub Integration
-
-1. Faça push do projeto para um repositório GitHub
-2. Acesse [vercel.com](https://vercel.com)
-3. Clique em "New Project"
-4. Selecione seu repositório
-5. Configure as opções (padrões funcionam bem)
-6. Clique em "Deploy"
-
-#### Opção 3: Drag & Drop
-
-1. Acesse [vercel.com/new](https://vercel.com/new)
-2. Arraste a pasta do projeto
-3. Vercel fará o deploy automaticamente
-
-### 📂 Estrutura do Projeto
-
-```
-├── index.html          # Arquivo principal do portfólio
-├── package.json        # Configurações do projeto
-├── vercel.json         # Configuração do Vercel
-├── .gitignore          # Arquivos a ignorar no Git
-└── README.md           # Este arquivo
-```
-
-### 🛠️ Desenvolvimento Local
-
-Para testar o site localmente:
-
-```bash
-# Instalar dependências (opcional para site estático)
-npm install
-
-# Rodar servidor de desenvolvimento
-npm run dev
-
-# Acesse http://localhost:3000
-```
 
 ### 🎯 Seções do Portfólio
 
@@ -103,5 +41,5 @@ O site é totalmente responsivo com breakpoints:
 MIT License - Sinta-se livre para usar como referência ou base para seu próprio portfólio.
 
 ---
-
+[acesse o site -](https://samuelmuniz.vercel.app/)
 **Desenvolvido com ☕️ e muito código**
